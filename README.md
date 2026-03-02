@@ -2,7 +2,7 @@ Agent Software
 1.This Project is go based system monitoring agent that collects the windows system metrices,linux system metrices ,Darwin system metrices
   ~displays them in terminal
   ~stores in text file(agent.txt)
-  ~ automatically stores in the download folder
+  ~ automatically stores in the home folder
 2.The agent gathers 
   ~system information
   ~CPU details
