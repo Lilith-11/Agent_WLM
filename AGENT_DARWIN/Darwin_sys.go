@@ -155,11 +155,11 @@ func Manufacturer() (string, error) {
 
 	   hz,err:=strconv.ParseUint(hzStr,10,64)
 	   fmt.Println("hz:",hz)
+	    if hz==0{
+		return fmt.Sprintf("CPU_SPEED_MHz : %d",hz),nil
+	   }
 	   if err!=nil{
 		return "",fmt.Errorf("failed to parse cpu frequency")
-	   }
-	   if hz==0{
-		return fmt.Sprintf("CPU_SPEED_MHz : %d",hz),nil
 	   }
 	   mhz:=hz/1000000
        return fmt.Sprintf("CPU_SPEED_MHz : %d",mhz),nil
