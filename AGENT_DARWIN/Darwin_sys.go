@@ -125,17 +125,18 @@ type DiskInfo struct{
 	 return totalRAMgb,nil}
 	 return 0,fmt.Errorf("unsupported platform:%s",plat)
  }
- func Manufacturer()(string,error){
-	if plat=="darwin"{
-       cmd:=exec.Command("sysctl","-n","machdep.cpu.vendor")
-	   out,err:=cmd.Output()
-	   if err!=nil{
-		return "",fmt.Errorf("couldn't get manufacturer")
-	   }
-	   return fmt.Sprintf("Manufacturer:%s",strings.TrimSpace(string(out))),nil
+func Manufacturer() (string, error) {
+	if plat == "darwin" {
+		cmd := exec.Command("sysctl", "-n", "machdep.cpu.brand_string")
+		out, err := cmd.Output()
+		if err != nil {
+			return "", fmt.Errorf("couldn't get manufacturer: %v", err)
+		}
+		return fmt.Sprintf("Manufacturer: %s",
+			strings.TrimSpace(string(out))), nil
 	}
-	return "",fmt.Errorf("couldn't Parse CPU Manufacturer Output")
- }
+	return "", fmt.Errorf("couldn't parse CPU manufacturer output")
+}
  func Model()(string,error){
    out,err:=exec.Command("sysctl","-n","machdep.cpu.brand_string").Output()
    if err!=nil{
