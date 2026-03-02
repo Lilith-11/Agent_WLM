@@ -146,13 +146,15 @@ func Manufacturer() (string, error) {
  }
  func CPUSPEEDMHz()(string,error){
 	if plat=="darwin"{
-       cmd:=exec.Command("sysctl","-n","hw.cpufrequency")
+       cmd:=exec.Command("sysctl","-n","hw.cpufrequency_max")
 	   out,err:=cmd.Output()
 	   if err!=nil{
           return "",fmt.Errorf("problem to get an information of cpusepped in MHz")
 	   }
 	   hzStr:=strings.TrimSpace(string(out))
+
 	   hz,err:=strconv.ParseUint(hzStr,10,64)
+	   fmt.Println("hz:",hz)
 	   if err!=nil{
 		return "",fmt.Errorf("failed to parse cpu frequency")
 	   }
